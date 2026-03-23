@@ -77,7 +77,7 @@ export const register = async (req, res) => {
             })
         }
 
-        const hashedPassword = await bcryptjs.hash(password, 16)
+        const hashedPassword = await bcryptjs.hash(password, 10)
 
         await User.create({
             fullName,
@@ -86,6 +86,7 @@ export const register = async (req, res) => {
         })
         return res.status(201).json({
             message: "Account created successfully",
+            success:true
 
         })
 

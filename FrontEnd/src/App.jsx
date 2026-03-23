@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Body  from "./components/Body.jsx";
 import Login from "./components/Login.jsx";
 import Browse from "./components/Browse.jsx";
+import { Toaster } from 'react-hot-toast';
 import './App.css'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
     <>
       <div>
         <RouterProvider router={appRouter} />
+       <Toaster/>
       </div>
 
     </>
