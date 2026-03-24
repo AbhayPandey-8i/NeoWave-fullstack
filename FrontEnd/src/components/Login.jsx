@@ -3,9 +3,9 @@ import Header from './Header'
 import axios from "axios"
 import { API_END_POINT } from '../../utils/constant'
 import toast from 'react-hot-toast';
-import {useNavigate} from "react-router-dom"
-import { useDispatch } from 'react-redux';
-import { setUser } from '../redux/userSlice';
+import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoading, setUser } from '../redux/userSlice';
 
 const Login = () => {
 
@@ -15,6 +15,7 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const isLoading = useSelector(store => store.app.isLoading)
 
     const toggleMode = () => {
         setIsLogin(!isLogin)
@@ -22,6 +23,8 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        dispatch(setLoading(true))
 
         try {
             if (isLogin) {
@@ -36,7 +39,7 @@ const Login = () => {
                 }
                 dispatch(setUser(res.data.user))
                 navigate("/browse")
-              
+
 
             } else {
                 // REGISTER
@@ -50,17 +53,20 @@ const Login = () => {
                     toast.success(res.data.message)
                 }
                 setIsLogin(true)
-                 navigate("/browse")
+                // navigate("/browse")
             }
-
             // clear fields
             setFullName("")
             setEmail("")
             setPassword("")
 
         } catch (error) {
-           toast.error(error.response.data.message)
+            toast.error(error.response.data.message)
             console.log(error.response?.data || error.message)
+        }
+
+        finally {
+            dispatch(setLoading(false))
         }
     }
 
@@ -111,8 +117,10 @@ const Login = () => {
                         className='outline-none p-3 my-2 rounded-sm bg-gray-800 text-white'
                     />
 
-                    <button className='bg-red-600 mt-6 p-3 text-white rounded-sm font-medium'>
-                        {isLogin ? "Login" : "Sign Up"}
+                    <button type='submit' className='bg-red-600 mt-6 p-3 text-white rounded-sm font-medium'>
+                        {isLoading
+                            ? (isLogin ? "Logging you in..." : "Creating your account...")
+                            : (isLogin ? "Login" : "Sign Up")}
                     </button>
 
                     <p className='text-white mt-2'>
