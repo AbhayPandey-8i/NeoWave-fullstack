@@ -33,13 +33,20 @@ export const login = async (req, res) => {
         }
 
         const tokenData = {
-            id:user._id
+            id: user._id
         }
 
         const token = await jwt.sign(tokenData, "dkdiocvhwochwifnv", { expiresIn: "1d" })
         return res.status(200).cookie("token", token, { httpOnly: true }).json({
             message: `Welcome Back ${user.fullName}`,
-            success: true
+            success: true,
+            user: {
+                _id: user._id,
+                fullName: user.fullName,
+                email: user.email,
+                password: user.password
+
+            }
         })
 
     } catch (error) {
@@ -49,10 +56,10 @@ export const login = async (req, res) => {
 
 
 export const Logout = async (req, res) => {
-  return res.status(200).cookie("token", "" , {expires: new Date(Date.now()), httpOnly:true}).json({
-    message:"User Logged Out Successfully",
-    success: true
-  })
+    return res.status(200).cookie("token", "", { expires: new Date(Date.now()), httpOnly: true }).json({
+        message: "User Logged Out Successfully",
+        success: true
+    })
 }
 
 
@@ -86,7 +93,7 @@ export const register = async (req, res) => {
         })
         return res.status(201).json({
             message: "Account created successfully",
-            success:true
+            success: true
 
         })
 
