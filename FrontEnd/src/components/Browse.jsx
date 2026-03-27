@@ -13,12 +13,15 @@ import usePopularMovies from '../hooks/usePopularMovies'
 import useTopRatedMovies from '../hooks/useTopRatedMovies'
 import { getUpcomingMovie } from '../redux/movieSlice'
 import useUpcomingMovies from '../hooks/useUpcomingMovies'
+import SearchMovie from './SearchMovie'
 
 
 const Browse = () => {
 
   const user = useSelector(store => store.app.user)
   const navigate = useNavigate()
+  const toggle = useSelector(store => store.movie.toggle)
+  
   const dispatch = useDispatch()
 
   //custom hooks
@@ -32,7 +35,7 @@ const Browse = () => {
       navigate("/")
 
     }
-  
+
   }, [])
 
 
@@ -44,8 +47,16 @@ const Browse = () => {
     <div>
       <Header />
       <div>
-        <MainContainer />
-        <MovieContainer />
+        {
+          toggle ? <SearchMovie /> : (
+            <>
+              <MainContainer />
+              <MovieContainer />
+            </>
+
+          )
+        }
+
       </div>
     </div>
   )
