@@ -3,11 +3,14 @@ import useMovieById from '../hooks/useMovieById'
 import { useSelector } from 'react-redux'
 
 const VideoBackground = ({movieId}) => {
-    
+     console.log("movieId received:", movieId)   
 
     const trailerMovie = useSelector(store=>store.movie.trailerMovie)
+    console.log("trailerMovie in component:", trailerMovie)
 
   useMovieById(movieId)
+
+  
 
     return (
         <div className='w-full' >

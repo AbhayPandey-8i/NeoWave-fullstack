@@ -20,16 +20,18 @@ const useMovieById = (movieId) => {
         );
 
         console.log("API RESULT:", res.data.results);
-
+        
         const trailer = res?.data?.results?.find(
           (item) => item.type === "Trailer"
         );
 
-        dispatch(
-          getTrailerMovie(
-            trailer ? trailer : res.data.results[0]
-          )
-        );
+
+        const fallback = res?.data?.results?.[0];
+        if (trailer || fallback) {
+          dispatch(getTrailerMovie(trailer || fallback));
+        } else {
+          console.warn("No trailer found for movie:", movieId);
+        }
 
         console.log("DISPATCHED TRAILER:", trailer);
 

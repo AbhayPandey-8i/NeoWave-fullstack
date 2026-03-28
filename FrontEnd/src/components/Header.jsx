@@ -34,8 +34,8 @@ const Header = () => {
 
 
   return (
-    <div className='z-10 absolute bg-linear-to-b from-black flex w-full items-center justify-between px-6'>
-      <img className='w-56' src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="" />
+    <div className=' -mt-14 z-10 absolute bg-linear-to-b from-black flex w-full items-center justify-between px-6'>
+      <img className=' w-90' src="https://res.cloudinary.com/dyhhoqavm/image/upload/v1774696294/Gemini_Generated_Image_sd8axksd8axksd8a-Picsart-BackgroundRemover_poywkm.png" alt="" />
       
       
 

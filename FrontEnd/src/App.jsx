@@ -4,6 +4,7 @@ import Login from "./components/Login.jsx";
 import Browse from "./components/Browse.jsx";
 import { Toaster } from 'react-hot-toast';
 import './App.css'
+import MovieDialog from "./components/MovieDialog.jsx";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
       <div>
         <RouterProvider router={appRouter} />
        <Toaster/>
+       <MovieDialog/>
       </div>
 
     </>
